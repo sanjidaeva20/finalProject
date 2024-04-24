@@ -5,10 +5,10 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif
 }
 
-*:focus {
+/* *:focus {
   border: 3px solid blue;
   padding: 2px;
-}
+} */
 
 /* HEADING & PARAGRAPH STYLING */
 h1 {
@@ -155,7 +155,7 @@ a.skip:focus{
   align-items: center;
 }
 
-.nav_item {
+.navItem {
   font-size: 18px;
   padding: 7px;
 }
@@ -194,7 +194,7 @@ footer {
 }
 
 /* ABOUT PAGE */
-.about_me {
+.aboutMe {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -203,7 +203,7 @@ footer {
     padding: 10px;
 }
 
-.about_me img {
+.aboutMe img {
     width: 400px;
     height: 425px;
     object-fit: cover;
@@ -212,38 +212,63 @@ footer {
     padding: 10px;
 }
 
-.projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
 
 
 
 .class {
     width: 425px;
     height: auto;
-    padding: 20px 20px;
+    /* padding: 20px 20px; */
     align-items: center;
+    margin-left: 40px;
+}
+.class img{
+  height: 150px;
+  /* width: 100% */
 }
 
+.class img.rotate {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0deg); /* Starts at 0 degrees */
+}
+
+.class img.rotate:hover {
+  transform: rotate(10deg); /* Rotates the image by 10 degrees on hover */
+}
+
+
+
 /* EXPERIENCES PAGE */
-.soft_skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+.projects {
+  display: flex; /* Enables Flexbox */
+  justify-content: space-around; 
+  align-items: center; 
+  flex-wrap: wrap; /* Allows items to wrap onto the next line as needed */
+  margin: 0 auto; /* Center the container horizontally if it has a specific width */
+  padding: 20px; 
+  width: 100%; /* Ensures the container takes full width */
 }
 
 .ss img {
   width: 425px;
   height: 300px;
   object-fit: cover;
+  display: block;
+  margin: auto;
 }
 
 .ss {
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
+  flex: 0 1 30%; 
+  margin: 10px; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.ss:hover {
+  transform: translateY(-5px); /* Optional: lift the card up on hover */
 }
 
 .resume {
@@ -257,6 +282,40 @@ margin-top: auto;
 }
 
 
+.footer-contact a, .footer-social a {
+  color: #7e0808; 
+  text-decoration: none; 
+  transition: color 0.3s ease; 
+}
+
+.footer-contact a:hover, .footer-social a:hover {
+  color: #fff; 
+  text-decoration: underline; 
+  font-weight: bold;
+}
+
+
+.footer-social {
+  display: flex; 
+  flex-direction: row;
+  align-items: center; 
+  justify-content: flex-start; /* Align items to the start of the flex container */
+  gap: 15px; 
+  padding: 10px;
+}
+
+.footer-social a {
+  padding: 8px 12px; 
+  border-radius: 4px; 
+  background-color: #fffcfc; 
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  background-color: #ab802f; 
+  color: #333; 
+}
 
 
 
@@ -285,6 +344,17 @@ margin-top: auto;
     transition: none;
     transform-style: none;
   }
+
+  .footer-contact, .footer-social {
+    text-align: center;
+    padding: 15px;
+    flex-direction: column; 
+    gap: 10px; 
+  }
+
+  .footer-social {
+    justify-content: center; 
+  }
 }
 
 /* Tablet View */
@@ -303,7 +373,7 @@ margin-top: auto;
     flex-direction: row;
   }
 
-  .nav_item {
+  .navItem {
     padding: 10px 10px;
   }
 
@@ -334,16 +404,17 @@ margin-top: auto;
     font-size: 18px;
   }
 
-  .about_me {
+  .aboutMe {
     flex-wrap: nowrap;
     padding: 30px 20px;
   }
 
-  .about_me img {
+  .aboutMe img {
     padding-left: 20px;
+    
   }
 
-  .about_me .text {
+  .aboutMe .text {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -357,10 +428,20 @@ margin-top: auto;
     /* grid-template-columns:  repeat(2, minmax(200px, 2fr)); */
     justify-content: center;
   }
+  .footer-contact, .footer-social {
+    text-align: center;
+    padding: 15px;
+    flex-direction: column; /* Stack vertically on smaller screens */
+    gap: 10px; /* Reduce gap on smaller screens */
+  }
+
+  .footer-social {
+    justify-content: center; /* Center social links on smaller screens */
+  }
 
 
 
-  .soft_skills {
+  .projects {
     flex-wrap: nowrap;
   }
 
@@ -396,4 +477,56 @@ margin-top: auto;
   .flex p {
     font-size: 19px;
   }
+}
+
+/* Container needs perspective to apply 3D transforms */
+.flip-container {
+  perspective: 1000px;
+  width: 300px; /* Define a specific width */
+  height: 200px; /* Define a specific height */
+  position: center;
+}
+
+/* Flipper will perform the actual flip */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+}
+
+/* Front and back faces */
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Front styling */
+.front img {
+  width: 100%;
+  height: auto;
+}
+
+/* Back styling */
+.back {
+  transform: rotateY(180deg); /* Flip the back side by default */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff; /* Background color for readability */
+}
+
+/* Rotate the flipper to show the back on hover */
+.flip-container:hover .flipper {
+  transform: rotateY(180deg);
+}
+
+/* Optional: style for the details on the back */
+.details {
+  text-align: center; /* Center the text inside the details block */
 }
